@@ -7,6 +7,6 @@ public class MainClassTest extends MainClass {
     public void testGetClassNumber() {
         int classNumber = this.getClassNumber();
         System.out.println(classNumber);
-        Assert.assertFalse("значение должно быть больше 45", classNumber > 45 );
+        Assert.assertTrue("значение должно быть больше 45", classNumber > 45 );
     }
 }
