@@ -4,10 +4,9 @@ import org.junit.Test;
 public class MainClassTest extends MainClass {
 
     @Test
-    public void testGetLocalNumber() {
-        int localNumber = this.getLocalNumber();
-        Assert.assertTrue("значение должно быть равно 14", localNumber == 14 );
+    public void testGetClassNumber() {
+        int classNumber = this.getClassNumber();
+        System.out.println(classNumber);
+        Assert.assertFalse("значение должно быть больше 45", classNumber > 45 );
     }
-
-
 }
