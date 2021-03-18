@@ -162,6 +162,59 @@ public class FirstTest {
         assertElementHasText(By.xpath("//*[@resource-id='org.wikipedia:id/search_container']//*[@text='Search Wikipedia']"), "Search Wikipedia", "placeholder don't find");
     }
 
+    @Test
+    public void testcheckWordSeacrh() {
+        waitForElementAndClick(
+                By.xpath("//*[contains(@text, 'Search Wikipedia')]"),
+                "Cannot find search Wikipedia input",
+                5
+        );
+
+        waitForElementAndSendKeys(
+                By.xpath("//*[contains(@text, 'Search…')]"),
+                "Java",
+                "Cannot find search input",
+                5
+        );
+
+        WebElement title_element = waitForElementPresent(
+                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Java']"),
+                "Cannot find artical title",
+                15
+        );
+
+        String article_title = title_element.getAttribute("text");
+
+        Assert.assertTrue("text don't find", article_title.contains("Java"));
+
+
+        WebElement title_element1 = waitForElementPresent(
+                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='JavaScript']"),
+                "Cannot find artical title",
+                15
+        );
+
+        String article_title1 = title_element1.getAttribute("text");
+
+        Assert.assertTrue(article_title1.contains("Java"));
+
+        WebElement title_element2 = waitForElementPresent(
+                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Java (programming language)']"),
+                "Cannot find artical title",
+                15
+        );
+
+        String article_title2 = title_element2.getAttribute("text");
+
+        Assert.assertTrue(article_title2.contains("Java"));
+
+
+
+
+
+    }
+
+
     private WebElement waitForElementPresent(By by, String error_message, long timeoutInSeconds) {
         WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
         wait.withMessage(error_message + "\n");
