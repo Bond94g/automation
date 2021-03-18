@@ -159,19 +159,7 @@ public class FirstTest {
 
     @Test
     public void testComparePlaceholderSearch() {
-        WebElement placeholder_element = waitForElementPresent(
-                By.xpath("//*[@resource-id='org.wikipedia:id/search_container']//*[@text='Search Wikipedia']"),
-                "Cannot find placeholder search",
-                15
-        );
-
-        String placeholder_search = placeholder_element.getAttribute("text");
-
-        Assert.assertEquals(
-                "We see unexpected placeholder",
-                "Search Wikipedia",
-                placeholder_search
-        );
+        assertElementHasText(By.xpath("//*[@resource-id='org.wikipedia:id/search_container']//*[@text='Search Wikipedia']"), "Search Wikipedia", "placeholder don't find");
     }
 
     private WebElement waitForElementPresent(By by, String error_message, long timeoutInSeconds) {
@@ -211,5 +199,11 @@ public class FirstTest {
         WebElement element = waitForElementPresent(by, error_mesage, timeoutInSeconds);
         element.clear();
         return element;
+    }
+
+    private void assertElementHasText(By by, String expected, String error_mesage) {
+        WebElement element = driver.findElement(by);
+
+        Assert.assertEquals(element.getAttribute("text"), expected);
     }
 }
