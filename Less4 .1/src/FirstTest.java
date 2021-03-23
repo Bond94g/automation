@@ -35,6 +35,7 @@ public class FirstTest {
 
     @After
     public void tearDown() {
+        driver.rotate(ScreenOrientation.PORTRAIT);
         driver.quit();
     }
 
@@ -610,7 +611,7 @@ public class FirstTest {
         driver.rotate(ScreenOrientation.LANDSCAPE);
 
         String title_after_rotation = waitForElementAndGetAttribute(
-                By.id("org.wikipedia:id/view_page_title_text"),
+                By.id("org.wikipedia:id/view_page_title_tex1t"),
                 "text",
                 "Cannot find title of article",
                 15
