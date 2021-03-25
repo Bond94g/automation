@@ -458,8 +458,8 @@ public class FirstTest {
 
         waitForElementAndClick(
                 By.id("org.wikipedia:id/item_title"),
-                "aa",
-                5
+                "Cannot find title",
+                15
         );
 
         waitForElementAndClick(
@@ -467,11 +467,6 @@ public class FirstTest {
                 "Cannot close article, cannot find X link",
                 15
         );
-
-
-
-
-
 
         waitForElementAndClick(
                 By.xpath("//android.widget.FrameLayout[@content-desc='My lists']"),
@@ -491,24 +486,25 @@ public class FirstTest {
         );
 
         waitForElementPresent(
-                By.xpath("//*[@text='Java (programming language)']"),
+                By.xpath("//*[@text='Appium']"),
                 "Cannot find saved article",
-                5
+                15
         );
 
         waitForElementAndClick(
-                By.xpath("//*[@text='Java (programming language)']"),
-                "Cannot find saved article",
-                5
+                By.xpath("//*[@text='Appium']"),
+                "Cannot find article",
+                15
         );
 
+        WebElement title_element = waitForElementPresent(
+                By.id("org.wikipedia:id/view_page_title_text"),
+                "Cannot find artical title",
+                15
+        );
 
-
-//        waitForElementAndClick(
-//                By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']"),
-//                "Cannot close article, cannot find X link",
-//                15
-//        );
+        String article_title = title_element.getAttribute("text");
+        Assert.assertEquals("title not found", article_title, "Appium");
     }
 
     @Test
