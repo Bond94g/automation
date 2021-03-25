@@ -31,11 +31,11 @@ public class FirstTest {
         capabilities.setCapability("app", "/Users/mihailevnin/Projects/automation/Less3/apks/org.wikipedia.apk");
 
         driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+        driver.rotate(ScreenOrientation.PORTRAIT);
     }
 
     @After
     public void tearDown() {
-        driver.rotate(ScreenOrientation.PORTRAIT);
         driver.quit();
     }
 
@@ -607,7 +607,7 @@ public class FirstTest {
         driver.rotate(ScreenOrientation.LANDSCAPE);
 
         String title_after_rotation = waitForElementAndGetAttribute(
-                By.id("org.wikipedia:id/view_page_title_tex1t"),
+                By.id("org.wikipedia:id/view_page_title_text"),
                 "text",
                 "Cannot find title of article",
                 15
