@@ -13,6 +13,8 @@ public class SearchTests extends CoreTestCase {
         SearchPageObject.initSearchInput();
         SearchPageObject.typeSearchLine("Java");
         SearchPageObject.waitForSearchResult("Object-oriented programming language");
+
+
     }
 
     @Test
@@ -31,6 +33,8 @@ public class SearchTests extends CoreTestCase {
         String search_line = "Linkin Park Diskography";
 
         SearchPageObject.typeSearchLine(search_line);
+
+        //*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Object-oriented programming language']
         int amount_of_search_results = SearchPageObject.getAmountOfFoundArticles();
 
         assertTrue(
@@ -86,6 +90,18 @@ public class SearchTests extends CoreTestCase {
 
         SearchPageObject.clickCancelSearch();
         SearchPageObject.waitForNoSearchResult("Java");
+
+    }
+
+    @Test
+    public void testWaitForElementByTitleAndDescription() {
+        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        SearchPageObject.initSearchInput();
+        SearchPageObject.typeSearchLine("Java");
+        SearchPageObject.waitForElementByTitleAndDescription("JavaScript", "Programming language");
+        SearchPageObject.waitForElementByTitleAndDescription("Java (programming language)", "Object-oriented programming language");
+        SearchPageObject.waitForElementByTitleAndDescription("Java", "Island of Indonesia");
+
 
     }
 }
