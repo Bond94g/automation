@@ -10,8 +10,8 @@ public class WelcomePageObject extends MainPageObject {
     STEP_NEW_WAYS_TO_EXPLORE_TEXT = "id:New ways to explore",
     STEP_ADD_OR_EDIT_PREFERRED_LANG_LINK = "id:Add or edit preferred languages",
     STEP_LEARN_MORE_ABOUT_DATA_COLLECTED_LINK = "id:Learn more about data collected",
-    NEXT_LINK = "Next",
-    GET_STARTED_BUTTON = "Get started";
+    NEXT_LINK = "id:Next",
+    GET_STARTED_BUTTON = "id:Get started";
 
     public WelcomePageObject(AppiumDriver driver) {
         super(driver);
