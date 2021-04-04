@@ -11,6 +11,18 @@ public class GetStartedTest extends iOSCoreTestCase {
         WelcomePageObject welcomePageObject = new WelcomePageObject(driver);
 
         welcomePageObject.waitForLearnMoreLink();
+        welcomePageObject.clickNextButton();
+
+        welcomePageObject.waitForNewWayToExploreText();
+        welcomePageObject.clickNextButton();
+
+        welcomePageObject.waitForAddOrEditPreferedLangText();
+        welcomePageObject.clickNextButton();
+
+        welcomePageObject.waitForLearnMoreAboutDataCollectedText();
+        welcomePageObject.clickGetStartedButton();
+
+
 
     }
 }

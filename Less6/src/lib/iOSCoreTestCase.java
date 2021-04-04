@@ -25,7 +25,7 @@ public class iOSCoreTestCase extends TestCase {
         capabilities.setCapability("platformName", "iOS");
         capabilities.setCapability("deviceName", "iphone se");
         capabilities.setCapability("platformVersion", "13.4");
-        capabilities.setCapability("app", "/Users/mihailevnin/Projects/automation/Less5/apks/Wikipedia.app");
+        capabilities.setCapability("app", "/Users/mihailevnin/Projects/automation/Less6/apks/Wikipedia.app");
 
         driver = new IOSDriver(new URL(AppiumURL), capabilities);
         this.rotateScreenPortrait();
