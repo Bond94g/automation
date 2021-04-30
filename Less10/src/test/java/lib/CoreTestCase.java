@@ -1,6 +1,7 @@
 package lib;
 
 import io.appium.java_client.AppiumDriver;
+import io.qameta.allure.Step;
 import junit.framework.TestCase;
 import org.junit.After;
 import org.junit.Before;
@@ -17,6 +18,7 @@ public class CoreTestCase {
 
 
     @Before
+    @Step("Run driver and session")
     public void setUp() throws Exception {
 
         driver = Platform.getInstance().getDriver();
@@ -26,10 +28,12 @@ public class CoreTestCase {
     }
 
     @After
+    @Step("Remove driver and session")
     public void tearDown()  {
         driver.quit();
     }
 
+    @Step("Rotate ScreenPortrait")
     protected void rotateScreenPortrait() {
         if (driver instanceof AppiumDriver) {
             AppiumDriver driver = (AppiumDriver) this.driver;

@@ -25,6 +25,7 @@ abstract public class NavigationUI extends MainPageObject {
     public void clickMyList() throws InterruptedException {
         Thread.sleep(1000);
         if (Platform.getInstance().isMW())  {
+            this.waitForElementDisplayed("MY_LIST_LINK", "dd",5);
             this.tryClickElementWithFewAttempts(
                     MY_LIST_LINK,
                     "Cannot find navigation button to My List",
@@ -33,6 +34,7 @@ abstract public class NavigationUI extends MainPageObject {
         }
 
         Thread.sleep(2000);
+       this.waitForElementDisplayed("MY_LIST_LINK", "dd",5);
         this.waitForElementAndClick(
                 MY_LIST_LINK,
                 "Cannot find navigation button to My List",

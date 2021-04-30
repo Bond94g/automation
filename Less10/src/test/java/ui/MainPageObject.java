@@ -40,6 +40,15 @@ public class MainPageObject {
         return waitForElementPresent(locator, error_message, 5);
     }
 
+    public WebElement waitForElementDisplayed(String locator, String error_message, long timeoutInSeconds) {
+        By by = this.getLocatorByString(locator);
+        WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
+        wait.withMessage(error_message + "\n");
+        return wait.until(
+                ExpectedConditions.visibilityOfElementLocated(by)
+        );
+    }
+
     public WebElement waitForElementAndClick(String locator, String error_mesage, long timeoutInSeconds) {
         WebElement element = waitForElementPresent(locator, error_mesage, timeoutInSeconds);
         element.click();
