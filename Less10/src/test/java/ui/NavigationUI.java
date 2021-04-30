@@ -23,24 +23,26 @@ abstract public class NavigationUI extends MainPageObject {
         }
     }
     public void clickMyList() throws InterruptedException {
-        Thread.sleep(1000);
+        Thread.sleep(5000);
         if (Platform.getInstance().isMW())  {
-            this.waitForElementDisplayed("MY_LIST_LINK", "dd",5);
+            this.waitForElementDisplayed(MY_LIST_LINK, "dd",5);
             this.tryClickElementWithFewAttempts(
                     MY_LIST_LINK,
                     "Cannot find navigation button to My List",
                     10
             );
         }
+        else {
+            this.waitForElementDisplayed(MY_LIST_LINK, "dd",5);
+            this.waitForElementAndClick(
+                    MY_LIST_LINK,
+                    "Cannot find navigation button to My List",
+                    10
+            );
+        }
+
+        Thread.sleep(3000);
 
         Thread.sleep(2000);
-       this.waitForElementDisplayed("MY_LIST_LINK", "dd",5);
-        this.waitForElementAndClick(
-                MY_LIST_LINK,
-                "Cannot find navigation button to My List",
-                10
-        );
-        Thread.sleep(2000);
-        System.out.println(7777777);
     }
 }

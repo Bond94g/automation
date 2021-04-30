@@ -16,6 +16,7 @@ public class MWArticlePageObject extends ArticlePageObject
         CLOSE_ARTICLE_TITLE1 = "id:Cancel";
         SAVE_TEST = "id:org.wikipedia:id/item_title";
         TEXT = "id:Appium";
+        TEXT1 = "xpath://span[@class='modified-enhancement']";
     }
 
     public MWArticlePageObject(RemoteWebDriver driver) {

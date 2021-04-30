@@ -20,7 +20,8 @@ abstract public class ArticlePageObject extends MainPageObject {
             CLOSE_ARTICLE_TITLE,
             CLOSE_ARTICLE_TITLE1,
             SAVE_TEST,
-            TEXT;
+            TEXT,
+            TEXT1;
 
 
     public ArticlePageObject(RemoteWebDriver driver) {
@@ -136,7 +137,6 @@ abstract public class ArticlePageObject extends MainPageObject {
         if (Platform.getInstance().isMW()) {
             this.removeArticleFromSavedIfItAdded();
         }
-        System.out.println(111111);
         this.waitForElementAndClick(OPTIONS_ADD_TO_MY_LIST_BUTTON, "Cannot find option to add article to reading list", 10);
     }
 
@@ -191,6 +191,10 @@ abstract public class ArticlePageObject extends MainPageObject {
 
     public void waitForElement() {
         this.waitForElementPresent(TEXT, "Cannot find element", 5);
+    }
+
+    public void waitForElementDescription() {
+        this.waitForElementPresent(TEXT1, "Cannot find element", 5);
     }
 
 

@@ -1,13 +1,16 @@
 package ui;
 
+import io.qameta.allure.Step;
+import org.junit.Test;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 abstract public class SearchPageObject extends MainPageObject {
-    protected static  String
+    protected static String
             SEARCH_INIT_ELEMENT,
             SEARCH_INPUT,
             SEARCH_CANCEL_BUTTON,
             SEARCH_RESULT_BY_SUBSTRING_TPL,
+            SEARCH_RESULT_BY_SUBSTRING_TPL_ITEM,
             SEARCH_RESULT_BY_SUBSTRING_TPL_1,
             SEARCH_RESULT_BY_SUBSTRING_TPL_2,
             SEARCH_RESULT_BY_SUBSTRING_TPL_3,
@@ -25,12 +28,16 @@ abstract public class SearchPageObject extends MainPageObject {
         return SEARCH_RESULT_BY_SUBSTRING_TPL.replace("{SUBSTRING}", substring);
     }
 
+    private static String getResultSearchElementItem(String substring) {
+        return SEARCH_RESULT_BY_SUBSTRING_TPL_ITEM.replace("{SUBSTRING}", substring);
+    }
+
     private static String getResultSearchElement1(String substring) {
-        return SEARCH_RESULT_BY_SUBSTRING_TPL1.replace("{SUBSTRING}", substring) ;
+        return SEARCH_RESULT_BY_SUBSTRING_TPL1.replace("{SUBSTRING}", substring);
     }
 
     private static String getResultSearchElement2(String substring) {
-        return SEARCH_RESULT_BY_SUBSTRING_TPL1.replace("{SUBSTRING1}", substring) ;
+        return SEARCH_RESULT_BY_SUBSTRING_TPL1.replace("{SUBSTRING1}", substring);
     }
 
     private static String getResultSearchElementNumber(String substring) {
@@ -64,12 +71,13 @@ abstract public class SearchPageObject extends MainPageObject {
 
     /* TEMPLATES METHODS */
 
-
+    @Step("Initializing the search field")
     public void initSearchInput() {
         this.waitForElementAndClick(SEARCH_INIT_ELEMENT, "Cannot find and click search init element", 5);
         this.waitForElementPresent(SEARCH_INIT_ELEMENT, "Cannot find search input after clicking search init element");
     }
 
+    @Step("Waiting for button to cancel search result")
     public void waitForCancelButtonToAppear() {
         this.waitForElementPresent(SEARCH_CANCEL_BUTTON, "Cannot find search cancel button", 10);
     }
@@ -147,16 +155,21 @@ abstract public class SearchPageObject extends MainPageObject {
     }
 
 
-
     public void clickByArticleWithSubstring(String substring) {
         String search_result_xpath = getResultSearchElement(substring);
         this.waitForElementAndClick(search_result_xpath, "Cannot find click search result with substring " + substring, 15);
     }
 
+    public void clickByArticleWithSubstringItem(String substring) {
+        String search_result_xpath = getResultSearchElementItem(substring);
+        this.waitForElementAndClick(search_result_xpath, "Cannot find click search result with substring " + substring, 15);
+    }
+
+
 
     public int getAmountOfFoundArticles() {
         this.waitForElementPresent(
-               SEARCH_RESULT_ELEMENT,
+                SEARCH_RESULT_ELEMENT,
                 "Cannot find anything by the request",
                 15
         );

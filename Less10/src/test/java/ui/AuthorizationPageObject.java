@@ -26,7 +26,6 @@ public class AuthorizationPageObject extends MainPageObject {
     }
 
     public void submitForm() {
-        System.out.println(555);
         this.waitForElementAndClick(SUBMIT_BUTTON, "Cannot find and click submit auth button", 5);
     }
 

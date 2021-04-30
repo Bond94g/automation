@@ -14,8 +14,8 @@ public class MyListsTests extends CoreTestCase {
 
     private static final String name_of_folder = "Learn programming";
     private static final String
-    login="bond94g",
-    password="cerwtccbz";
+            login = "bond94g",
+            password = "cerwtccbz";
 
     @Test
     public void testSaveFirstArticleToMyList() throws InterruptedException {
@@ -27,8 +27,6 @@ public class MyListsTests extends CoreTestCase {
         ArticlePageObject ArticlePageObject = ArticlePageObjectFactory.get(driver);
         ArticlePageObject.waitForTitleElement();
         String article_title = ArticlePageObject.getArticleTitle();
-
-
 
         if (Platform.getInstance().isAndroid()) {
             ArticlePageObject.addArticleToMyList(name_of_folder);
@@ -48,7 +46,7 @@ public class MyListsTests extends CoreTestCase {
 
             Assert.assertEquals("We are not on the same page after login", article_title, ArticlePageObject.getArticleTitle());
             Thread.sleep(3000);
-            //ArticlePageObject.addArticlesToMySaved();
+            ArticlePageObject.addArticlesToMySaved();
             Thread.sleep(3000);
         }
 
@@ -62,7 +60,6 @@ public class MyListsTests extends CoreTestCase {
         NavigationUI.openNavigaion();
 
         NavigationUI.clickMyList();
-        System.out.println(7777777);
         Thread.sleep(3000);
 
         MyListPageObject MyListPageObject = MyListsPageObjectFactory.get(driver);
@@ -82,7 +79,7 @@ public class MyListsTests extends CoreTestCase {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
         SearchPageObject.initSearchInput();
         SearchPageObject.typeSearchLine("Java");
-        SearchPageObject.clickByArticleWithSubstring("Object-oriented programming language");
+        SearchPageObject.clickByArticleWithSubstring("bject-oriented programming language");
 
         ArticlePageObject ArticlePageObject = ArticlePageObjectFactory.get(driver);
         ArticlePageObject.waitForTitleElement();
@@ -90,11 +87,26 @@ public class MyListsTests extends CoreTestCase {
 
         if (Platform.getInstance().isAndroid()) {
             ArticlePageObject.addArticleToMyList(name_of_folder);
-        }
-
-        else {
+        } else {
             ArticlePageObject.addArticlesToMySaved();
         }
+
+        if (Platform.getInstance().isMW()) {
+
+            AuthorizationPageObject Auth = new AuthorizationPageObject(driver);
+            Thread.sleep(1000);
+            Auth.clickAuthButton();
+
+            Auth.enterLoginData(login, password);
+            Auth.submitForm();
+            Thread.sleep(3000);
+
+            Assert.assertEquals("We are not on the same page after login", article_title, ArticlePageObject.getArticleTitle());
+            Thread.sleep(3000);
+            ArticlePageObject.addArticlesToMySaved();
+            Thread.sleep(3000);
+        }
+
         ArticlePageObject.closeArticle();
         if (Platform.getInstance().isIOS()) {
             ArticlePageObject.closeArticle1();
@@ -102,18 +114,22 @@ public class MyListsTests extends CoreTestCase {
 
         SearchPageObject.initSearchInput();
         SearchPageObject.typeSearchLine("Appium");
-        SearchPageObject.clickByArticleWithSubstring("Appium");
+        Thread.sleep(1000);
+        if (Platform.getInstance().isIOS() || Platform.getInstance().isAndroid()) {
+            SearchPageObject.clickByArticleWithSubstring("Appium");
+        } else {
+            SearchPageObject.clickByArticleWithSubstringItem("Appium");
+        }
+
         if (Platform.getInstance().isIOS()) {
             String article_title1 = ArticlePageObject.getArticleTitleIOS();
             ArticlePageObject.waitForIosTitleElement();
         }
 
 
-
         if (Platform.getInstance().isAndroid()) {
             ArticlePageObject.addArticle1ToMyList();
-        }
-        else {
+        } else {
             ArticlePageObject.addArticlesToMySaved();
         }
         ArticlePageObject.closeArticle();
@@ -121,21 +137,26 @@ public class MyListsTests extends CoreTestCase {
             ArticlePageObject.closeArticle1();
         }
 
+        Thread.sleep(1000);
+
 
         NavigationUI NavigationUI = NavigationUIFactory.get(driver);
+        NavigationUI.openNavigaion();
         NavigationUI.clickMyList();
 
         MyListPageObject MyListPageObject = MyListsPageObjectFactory.get(driver);
         if (Platform.getInstance().isAndroid()) {
             MyListPageObject.openFolderByName(name_of_folder);
-        }
-        else {
+        } else if (Platform.getInstance().isIOS()) {
             MyListPageObject.closeWindow();
         }
 
 
-
         MyListPageObject.swipeByArticleToDelete(article_title);
-        ArticlePageObject.waitForElement();
+        if (Platform.getInstance().isMW()) {
+            ArticlePageObject.waitForElementDescription();
+        } else {
+            ArticlePageObject.waitForElement();
+        }
     }
 }
