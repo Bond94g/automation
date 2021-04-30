@@ -2,6 +2,7 @@ package tests;
 
 import lib.CoreTestCase;
 import lib.Platform;
+import org.junit.Assert;
 import org.junit.Test;
 import ui.*;
 import ui.factories.ArticlePageObjectFactory;
@@ -17,7 +18,7 @@ public class MyListsTests extends CoreTestCase {
     password="cerwtccbz";
 
     @Test
-    public void testSaveFirstArticleToMyList() {
+    public void testSaveFirstArticleToMyList() throws InterruptedException {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
         SearchPageObject.initSearchInput();
         SearchPageObject.typeSearchLine("Java");
@@ -27,7 +28,6 @@ public class MyListsTests extends CoreTestCase {
         ArticlePageObject.waitForTitleElement();
         String article_title = ArticlePageObject.getArticleTitle();
 
-        System.out.println(article_title);
 
 
         if (Platform.getInstance().isAndroid()) {
@@ -39,40 +39,37 @@ public class MyListsTests extends CoreTestCase {
         if (Platform.getInstance().isMW()) {
 
             AuthorizationPageObject Auth = new AuthorizationPageObject(driver);
-            System.out.println(111199);
+            Thread.sleep(1000);
             Auth.clickAuthButton();
 
             Auth.enterLoginData(login, password);
             Auth.submitForm();
-            System.out.println(99);
+            Thread.sleep(3000);
 
-            ArticlePageObject.waitForTitleElement();
-            ArticlePageObject.waitForTitleElement();
-            ArticlePageObject.waitForTitleElement();
-            ArticlePageObject.waitForTitleElement();
-            ArticlePageObject.waitForTitleElement();
-            System.out.println(991);
-            System.out.println(article_title);
-            System.out.println(ArticlePageObject.getArticleTitle());
-            assertEquals("We are not on the same page after login", article_title, ArticlePageObject.getArticleTitle());
-            ArticlePageObject.addArticlesToMySaved();
+            Assert.assertEquals("We are not on the same page after login", article_title, ArticlePageObject.getArticleTitle());
+            Thread.sleep(3000);
+            //ArticlePageObject.addArticlesToMySaved();
+            Thread.sleep(3000);
         }
 
         ArticlePageObject.closeArticle();
         if (Platform.getInstance().isIOS()) {
             ArticlePageObject.closeArticle1();
         }
-
+        Thread.sleep(3000);
 
         NavigationUI NavigationUI = NavigationUIFactory.get(driver);
         NavigationUI.openNavigaion();
-        NavigationUI.clickMyList();
 
+        NavigationUI.clickMyList();
+        System.out.println(7777777);
+        Thread.sleep(3000);
 
         MyListPageObject MyListPageObject = MyListsPageObjectFactory.get(driver);
+
         if (Platform.getInstance().isAndroid()) {
             MyListPageObject.openFolderByName(name_of_folder);
-        } else {
+        } else if (Platform.getInstance().isIOS()) {
             MyListPageObject.closeWindow();
         }
 
@@ -81,7 +78,7 @@ public class MyListsTests extends CoreTestCase {
     }
 
     @Test
-    public void testSaveSecondArticleToMyList() {
+    public void testSaveSecondArticleToMyList() throws InterruptedException {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
         SearchPageObject.initSearchInput();
         SearchPageObject.typeSearchLine("Java");

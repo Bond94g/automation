@@ -131,7 +131,8 @@ abstract public class ArticlePageObject extends MainPageObject {
 
     }
 
-    public void addArticlesToMySaved() {
+    public void addArticlesToMySaved() throws InterruptedException {
+        Thread.sleep(3000);
         if (Platform.getInstance().isMW()) {
             this.removeArticleFromSavedIfItAdded();
         }
@@ -157,7 +158,7 @@ abstract public class ArticlePageObject extends MainPageObject {
     }
 
     public void closeArticle() {
-        if (Platform.getInstance().isAndroid()) {
+        if (Platform.getInstance().isAndroid() || Platform.getInstance().isIOS()) {
             this.waitForElementAndClick(
                     CLOSE_ARTICLE_TITLE,
                     "Cannot close article, cannot find X link",
