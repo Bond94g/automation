@@ -1,5 +1,7 @@
 package tests;
 
+import io.qameta.allure.*;
+import io.qameta.allure.junit4.DisplayName;
 import lib.CoreTestCase;
 import lib.Platform;
 import org.junit.Assert;
@@ -9,8 +11,14 @@ import ui.SearchPageObject;
 import ui.factories.ArticlePageObjectFactory;
 import ui.factories.SearchPageObjectFactory;
 
+@Epic("Tests for change screen orientation and background app")
 public class ChangeAppConditionsTests extends CoreTestCase {
     @Test
+    @Features(value = {@Feature(value = "Change screen"), @Feature(value = "Article")})
+    @DisplayName("Change screen orientation on search results")
+    @Description("We change screen orientation and assert title")
+    @Step("Starting test testChangeScreenOrientationOnSearchResults")
+    @Severity(value = SeverityLevel.NORMAL)
     public void testChangeScreenOrientationOnSearchResults() {
         if (Platform.getInstance().isMW()) {
             return;
@@ -49,6 +57,11 @@ public class ChangeAppConditionsTests extends CoreTestCase {
     }
 
     @Test
+    @Features(value = {@Feature(value = "Background app"), @Feature(value = "Article")})
+    @DisplayName("Check article in background")
+    @Description("We background app and click article")
+    @Step("Starting test testCheckSearchArticleInBackground")
+    @Severity(value = SeverityLevel.NORMAL)
     public void testCheckSearchArticleInBackground() {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
         SearchPageObject.initSearchInput();

@@ -1,5 +1,7 @@
 package tests;
 
+import io.qameta.allure.*;
+import io.qameta.allure.junit4.DisplayName;
 import lib.CoreTestCase;
 import lib.Platform;
 import org.junit.Assert;
@@ -10,6 +12,7 @@ import ui.factories.MyListsPageObjectFactory;
 import ui.factories.NavigationUIFactory;
 import ui.factories.SearchPageObjectFactory;
 
+@Epic("Test for adding and delete article in favorites")
 public class MyListsTests extends CoreTestCase {
 
     private static final String name_of_folder = "Learn programming";
@@ -18,6 +21,11 @@ public class MyListsTests extends CoreTestCase {
             password = "cerwtccbz";
 
     @Test
+    @Features(value = {@Feature(value = "Favorites"), @Feature(value = "Article")})
+    @DisplayName("Adding article in favorites")
+    @Description("We adding article in favorites and delete article")
+    @Step("Starting test testSaveFirstArticleToMyList")
+    @Severity(value = SeverityLevel.CRITICAL)
     public void testSaveFirstArticleToMyList() throws InterruptedException {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
         SearchPageObject.initSearchInput();
@@ -75,6 +83,12 @@ public class MyListsTests extends CoreTestCase {
     }
 
     @Test
+    @Features(value = {@Feature(value = "Favorites"), @Feature(value = "Article")})
+    @DisplayName("Adding 2 article in favorites")
+    @Description("We adding two article in favorites and delete article")
+    @Step("Starting test testSaveSecondArticleToMyList")
+    @Severity(value = SeverityLevel.CRITICAL)
+
     public void testSaveSecondArticleToMyList() throws InterruptedException {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
         SearchPageObject.initSearchInput();

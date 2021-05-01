@@ -82,23 +82,28 @@ abstract public class SearchPageObject extends MainPageObject {
         this.waitForElementPresent(SEARCH_CANCEL_BUTTON, "Cannot find search cancel button", 10);
     }
 
+    @Step("Waiting for button to cancel no search result")
     public void waitForCancelButtonToDisappear() {
         this.waitForElementNotPresent(SEARCH_CANCEL_BUTTON, "Search cancel button is still present", 10);
     }
 
+    @Step("Clicking button to cancel search result")
     public void clickCancelSearch() {
         this.waitForElementAndClick(SEARCH_CANCEL_BUTTON, "Cannot find and click search cancel button", 5);
     }
 
+    @Step("Typing '{search_line}' to the search line")
     public void typeSearchLine(String search_line) {
         this.waitForElementAndSendKeys(SEARCH_INPUT, search_line, "Cannot find and type into search input", 5);
     }
 
+    @Step("Waiting for search result")
     public void waitForSearchResult(String substring) {
         String search_result_xpath = getResultSearchElement(substring);
         this.waitForElementPresent(search_result_xpath, "Cannot find search result with substring " + substring);
     }
 
+    @Step("Waiting for element by title and description")
     public void waitForElementByTitleAndDescription(String title, String description) {
         String search_result_xpath = getResultSearchElement1(title);
         String search_result_xpath1 = getResultSearchElement2(description);
@@ -106,16 +111,19 @@ abstract public class SearchPageObject extends MainPageObject {
         this.waitForElementPresent(search_result_xpath1, "Cannot find search result with description " + description);
     }
 
+    @Step("Wait for no search result")
     public void waitForNoSearchResult(String substring) {
         String search_result_xpath = getResultSearchElement(substring);
         this.waitForElementNotPresent(search_result_xpath, "Cannot find search result with substring " + substring, 5);
     }
 
+    @Step("Wait for search result 1")
     public String waitForSearchResult1(String substring) {
         String search_result_xpath = getResultSearchElement(substring);
         return this.waitForElementAndGetAttribute(search_result_xpath, "name", "Cannot find search result with substring " + substring, 5);
     }
 
+    @Step("Wait for search element by title mobile view")
     public void waitForSearchElementByTitleMW(String number, String substring) {
         String search_result_xpath = getResultSearchElementByTitleMW(number, substring);
 
@@ -127,46 +135,39 @@ abstract public class SearchPageObject extends MainPageObject {
 
     }
 
+    @Step("Waiting for search element by title mobile view")
     public void waitForSearchElementByTitleMW(String number, String substring, String substring1) {
         String search_result_xpath = getResultSearchElementByStrongTitleMW(number, substring, substring1);
-
-
-        System.out.println(search_result_xpath);
-
-
         this.waitForElementPresent(search_result_xpath, "Cannot find search result with title " + number);
 
     }
 
+    @Step("Waiting for search element by title and description mobile view")
     public void waitForSearchElementByTitleAndDescriptionMW(String number, String substring, String substring1) {
         String search_result_xpath = getResultSearchElementByTitleAndDescriptionMW(number, substring, substring1);
-
-
-        System.out.println(search_result_xpath);
-
-
         this.waitForElementPresent(search_result_xpath, "Cannot find search result with title " + number);
 
     }
 
+    @Step("Waiting for search result number")
     public void waitForSearchResultNumber(String substring) {
         String search_result_xpath = getResultSearchElementNumber(substring);
         this.waitForElementPresent(search_result_xpath, "Cannot find search result with substring " + substring);
     }
 
-
+    @Step("Waiting for search result and select an article by substring in article title")
     public void clickByArticleWithSubstring(String substring) {
         String search_result_xpath = getResultSearchElement(substring);
         this.waitForElementAndClick(search_result_xpath, "Cannot find click search result with substring " + substring, 15);
     }
 
+    @Step("Waiting for search result and select an article by substring in article title item")
     public void clickByArticleWithSubstringItem(String substring) {
         String search_result_xpath = getResultSearchElementItem(substring);
         this.waitForElementAndClick(search_result_xpath, "Cannot find click search result with substring " + substring, 15);
     }
 
-
-
+    @Step("equals amount articles")
     public int getAmountOfFoundArticles() {
         this.waitForElementPresent(
                 SEARCH_RESULT_ELEMENT,
@@ -176,13 +177,14 @@ abstract public class SearchPageObject extends MainPageObject {
         return this.getAmountOfElements(SEARCH_RESULT_ELEMENT);
     }
 
+    @Step("Waiting for empty results label")
     public void waitForEmptyResultsLabel() {
         this.waitForElementPresent(SEARCH_EMPTY_RESULT_ELEMENT, "Cannot find empty result elements.", 15);
     }
 
+    @Step("Making sure there are no results for the search")
     public void assertThereIsNoResultOfSearch() {
         this.assertElementNotPresent(SEARCH_RESULT_ELEMENT, "We supposed not to find any results");
-
     }
 
 

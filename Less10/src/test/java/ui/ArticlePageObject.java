@@ -1,6 +1,7 @@
 package ui;
 
 import io.appium.java_client.AppiumDriver;
+import io.qameta.allure.Step;
 import lib.Platform;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -28,18 +29,22 @@ abstract public class ArticlePageObject extends MainPageObject {
         super(driver);
     }
 
+    @Step("Waiting for title on the article page")
     public WebElement waitForTitleElement() {
         return this.waitForElementPresent(TITLE, "Cannot find article title on page", 135);
 
     }
 
+    @Step("Waiting for ios title on the article page")
     public WebElement waitForIosTitleElement() {
         return this.waitForElementPresent(TITLE1, "Cannot find article title on page", 15);
 
     }
 
+    @Step("Get article title")
     public String getArticleTitle() {
         WebElement title_element = waitForTitleElement();
+        screenshot(this.takeScreenshot("article_title"));
         if (Platform.getInstance().isAndroid()) {
             return title_element.getAttribute("text");
         } else if (Platform.getInstance().isIOS()) {
@@ -49,6 +54,7 @@ abstract public class ArticlePageObject extends MainPageObject {
         }
     }
 
+    @Step("Get article ios title")
     public String getArticleTitleIOS() {
         WebElement title_element = waitForIosTitleElement();
         if (Platform.getInstance().isAndroid()) {
@@ -58,7 +64,7 @@ abstract public class ArticlePageObject extends MainPageObject {
         }
     }
 
-
+@Step("Swiping to footer on article page")
     public void swipeToFooter() {
         if (Platform.getInstance().isAndroid()) {
             this.swipeUpToFindElement(FOOTER_ELEMENT, "Cannot find the end of article", 40);
@@ -70,6 +76,7 @@ abstract public class ArticlePageObject extends MainPageObject {
 
     }
 
+    @Step("Adding the article to my list")
     public void addArticleToMyList(String name_of_folder) {
         this.waitForElementAndClick(
                 OPTIONS_BUTTON,
@@ -110,6 +117,7 @@ abstract public class ArticlePageObject extends MainPageObject {
         );
     }
 
+    @Step("Adding the article1 to my list")
     public void addArticle1ToMyList() {
         this.waitForElementAndClick(
                 OPTIONS_BUTTON,
@@ -132,6 +140,7 @@ abstract public class ArticlePageObject extends MainPageObject {
 
     }
 
+    @Step("Adding the article to my saved articles")
     public void addArticlesToMySaved() throws InterruptedException {
         Thread.sleep(3000);
         if (Platform.getInstance().isMW()) {
@@ -140,6 +149,7 @@ abstract public class ArticlePageObject extends MainPageObject {
         this.waitForElementAndClick(OPTIONS_ADD_TO_MY_LIST_BUTTON, "Cannot find option to add article to reading list", 10);
     }
 
+    @Step("Removing the article from saved if it has been added")
     public void removeArticleFromSavedIfItAdded() {
         if (this.isElementPresent(OPTIONS_REMOVE_FROM__MY_LIST_BUTTON)) {
             this.waitForElementAndClick(
@@ -157,6 +167,7 @@ abstract public class ArticlePageObject extends MainPageObject {
         }
     }
 
+    @Step("Closing the article")
     public void closeArticle() {
         if (Platform.getInstance().isAndroid() || Platform.getInstance().isIOS()) {
             this.waitForElementAndClick(
@@ -169,6 +180,7 @@ abstract public class ArticlePageObject extends MainPageObject {
         }
     }
 
+    @Step("Closing the article 1")
     public void closeArticle1() {
         if (Platform.getInstance().isIOS()) {
             this.waitForElementAndClick(
@@ -189,10 +201,12 @@ abstract public class ArticlePageObject extends MainPageObject {
         );
     }
 
+    @Step("Waiting for element")
     public void waitForElement() {
         this.waitForElementPresent(TEXT, "Cannot find element", 5);
     }
 
+    @Step("Waiting for element description")
     public void waitForElementDescription() {
         this.waitForElementPresent(TEXT1, "Cannot find element", 5);
     }

@@ -1,5 +1,7 @@
 package tests;
 
+import io.qameta.allure.*;
+import io.qameta.allure.junit4.DisplayName;
 import lib.CoreTestCase;
 import lib.Platform;
 import org.junit.Assert;
@@ -7,8 +9,14 @@ import org.junit.Test;
 import ui.SearchPageObject;
 import ui.factories.SearchPageObjectFactory;
 
+@Epic("Test for search")
 public class SearchTests extends CoreTestCase {
     @Test
+    @Features(value = {@Feature(value = "Search")})
+    @DisplayName("test search")
+    @Description("We search article")
+    @Step("Starting test testSearch")
+    @Severity(value = SeverityLevel.BLOCKER)
     public void testSearch() {
 
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
@@ -20,6 +28,11 @@ public class SearchTests extends CoreTestCase {
     }
 
     @Test
+    @Features(value = {@Feature(value = "Search")})
+    @DisplayName("test cancel search")
+    @Description("We cancel search")
+    @Step("Starting test testCancelSearch1")
+    @Severity(value = SeverityLevel.BLOCKER)
     public void testCancelSearch1() {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
         SearchPageObject.initSearchInput();
@@ -29,6 +42,11 @@ public class SearchTests extends CoreTestCase {
     }
 
     @Test
+    @Features(value = {@Feature(value = "Search"), @Feature(value = "Amount") })
+    @DisplayName("test amount search")
+    @Description("We amount search")
+    @Step("Starting test testAmountOfNotEmptySearch")
+    @Severity(value = SeverityLevel.NORMAL)
     public void testAmountOfNotEmptySearch() {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
         SearchPageObject.initSearchInput();
@@ -48,6 +66,11 @@ public class SearchTests extends CoreTestCase {
     }
 
     @Test
+    @Features(value = {@Feature(value = "Search"), @Feature(value = "Amount") })
+    @DisplayName("test amount no search")
+    @Description("We amount no search")
+    @Step("Starting test testAmountOfEmptySearch")
+    @Severity(value = SeverityLevel.NORMAL)
     public void testAmountOfEmptySearch() {
 
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
@@ -60,6 +83,11 @@ public class SearchTests extends CoreTestCase {
     }
 
     @Test
+    @Features(value = {@Feature(value = "Search"), @Feature(value = "Cancel") })
+    @DisplayName("test cancel search")
+    @Description("We cancel search")
+    @Step("Starting test testCancelSearch")
+    @Severity(value = SeverityLevel.NORMAL)
     public void testCancelSearch() {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
         SearchPageObject.initSearchInput();
@@ -104,6 +132,11 @@ public class SearchTests extends CoreTestCase {
     }
 
     @Test
+    @Features(value = {@Feature(value = "Search"), @Feature(value = "Article") })
+    @DisplayName("test wait for element by title and description")
+    @Description("We wait 3 article for element by title and description ")
+    @Step("Starting test testWaitForElementByTitleAndDescription")
+    @Severity(value = SeverityLevel.NORMAL)
     public void testWaitForElementByTitleAndDescription() {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
         SearchPageObject.initSearchInput();
